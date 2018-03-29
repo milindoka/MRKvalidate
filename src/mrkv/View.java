@@ -1,4 +1,4 @@
-package mvc;
+package mrkv;
 
 
 import javax.swing.*;
@@ -9,7 +9,7 @@ import java.awt.Container;
 public class View {
       
     private JFrame frame;
-    private JButton button;
+    private JButton b01,b02;
 
     
     public View(String text)
@@ -36,18 +36,24 @@ public class View {
         MainPane.add(labelCENTER,BorderLayout.CENTER);
         MainPane.add(labelEAST,BorderLayout.EAST);
         
-        button = new JButton("Button");
-        buttonpanel.add(button);
+        b01 = new JButton("b01");
+        buttonpanel.add(b01);
+        
+        b02 = new JButton("b02");
+        buttonpanel.add(b02);
+    
         frame.getContentPane().add(buttonpanel, BorderLayout.SOUTH);        
     }
         
-    public JButton getButton(){
-        return button;
+    public JButton getb01(){
+        return b01;
     }
-  /*  
-    public void setText(String text){
-        label.setText(text);
+
+    public JButton getb02(){
+        return b02;
     }
-    */
+    
+    
+    
     
 }
