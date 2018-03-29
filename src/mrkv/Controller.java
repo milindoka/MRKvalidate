@@ -2,6 +2,7 @@ package mrkv;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
@@ -67,13 +68,19 @@ public void show(long msg)
     private void CheckVacant()
     { 
     	int totalfiles=model.GetAllFiles(jarpath);
-    	
-    	model.LoadMarkListFileToStrArray(0);
+    	for(int fileindex=0;fileindex<totalfiles;fileindex++)
+    	{
+    	model.LoadMarkListFileToStrArray(fileindex);
     	model.ExtractAllHeaderFields();
-        model.ProcessCurrentMarklist();
-    	
-    	
-    	
+       // model.ProcessCurrentMarklist();
+    	try {
+			model.SaveList(fileindex);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	show("Pause");
+    	}
     	/*
     	String errorMessage = "";
     	do {

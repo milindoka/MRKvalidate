@@ -150,7 +150,7 @@ public class Model {
     			e.printStackTrace();
     		}
         	
-        	System.out.println(nameArray.get(0));
+        	System.out.println(nameArray.get(currentindex));
          }
     
 
@@ -181,7 +181,15 @@ public class Model {
 		for(int i=28+3*TotalSets;i<strArray.size();i++) 
 		{
 		stemp=strArray.get(i); temp=stemp.split(":");
-    	rollArray.add(temp[0].trim());markArray.add(temp[1].trim());
+		
+		int introll=Integer.parseInt(temp[0].trim());
+		if(Vacant(introll))
+		{if(stemp.contains("AB"))
+			{ String ready=stemp.replace("AB", "");
+			  strArray.set(i,ready);
+			}
+			
+		}
 		
 		}
 		
@@ -190,24 +198,6 @@ public class Model {
     	
     }
 
-    
-    public void ProcessCurrentMarklist()
-    {
-    	System.out.println("processing");
-    	System.out.println(rollArray.size());
-    for(int i=0;i<rollArray.size();i++)
-	{  
-    	String str=rollArray.get(i);
-    	int introll=Integer.parseInt(str);
-    	
-    	if(Vacant(introll)) 
-    	    { System.out.println(introll); continue; }
-		
-    	    	//if(markArray.get(i).contains("AB")) 
-	    //show(rollArray.get(i)+":"+markArray.get(i));
-	}
-    }
-    
     
     private boolean Vacant(int roll)
     { //boolean vacant=true;
@@ -238,9 +228,9 @@ public class Model {
 	    int TotalSets=Integer.parseInt(temp[1].replaceAll("[^0-9.]",""));
         
         
-        strArray.set(15+3*TotalSets,"Div         :"+Division); 
-    	strArray.set(17+3*TotalSets,"Subject     :"+Subject);
-    	strArray.set(18+3*TotalSets,"Examination :"+Examination);
+        strArray.set(15+3*TotalSets,"Div         : "+Division); 
+    	strArray.set(17+3*TotalSets,"Subject     : "+Subject);
+    	strArray.set(18+3*TotalSets,"Examination : "+Examination);
     	
     	for(int i=0;i<strArray.size();i++) 
     		{f0.write(strArray.get(i));f0.write(newLine);}
