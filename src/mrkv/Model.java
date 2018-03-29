@@ -150,6 +150,7 @@ public class Model {
     			e.printStackTrace();
     		}
         	
+        	System.out.println(nameArray.get(0));
          }
     
 
@@ -198,9 +199,11 @@ public class Model {
 	{  
     	String str=rollArray.get(i);
     	int introll=Integer.parseInt(str);
-    	if(Vacant(introll)) System.out.println(introll);
+    	
+    	if(Vacant(introll)) 
+    	    { System.out.println(introll); continue; }
 		
-    	//if(markArray.get(i).contains("AB")) 
+    	    	//if(markArray.get(i).contains("AB")) 
 	    //show(rollArray.get(i)+":"+markArray.get(i));
 	}
     }
@@ -209,8 +212,15 @@ public class Model {
     private boolean Vacant(int roll)
     { //boolean vacant=true;
       for(int i=0;i< Div.size();i++)
-          {if(roll>=Left.get(i) && roll<=Right.get(i)) 
-    	    return false; // Student exists NOT vacant
+         { if(roll>=Left.get(i) && roll<=Right.get(i)) 
+         	{ String OptedSubjects=Subjects.get(i);
+         	  if(!OptedSubjects.contains(Subject.substring(0,2))) 
+ 			   { System.out.print(roll);
+ 			     System.out.println(" Sub Vacant");
+ 			     return true;
+ 			   }
+        	 return false; // Student exists NOT vacant
+         	}
     	 }
        return true;
     	
