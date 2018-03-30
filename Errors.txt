@@ -1,0 +1,39 @@
+5021 : 02 Vacant Error
+5065 : 01 Vacant Error
+5283 : 15 Vacant Error
+5341 : 09 Vacant Error
+5356 : 07 Vacant Error
+5372 : 08 Vacant Error
+5388 : 09 Vacant Error
+5392 : 13 Vacant Error
+5393 : 13 Vacant Error
+5408 : 06 Vacant Error
+5388 : 04 Vacant Error
+5169 Sub Vacant
+5203 : 07 Vacant Error
+5225 Sub Vacant
+5264 : 01 Vacant Error
+5266 : 06 Vacant Error
+5267 Sub Vacant
+5279 Sub Vacant
+5388 : 06 Vacant Error
+5436 Sub Vacant
+5076 Sub Vacant
+5076 : 21 Vacant Error
+5080 Sub Vacant
+5080 : 11 Vacant Error
+5136 Sub Vacant
+5136 : 18 Vacant Error
+5283 : 23 Vacant Error
+5341 : 18 Vacant Error
+5356 : 24 Vacant Error
+5372 : 24 Vacant Error
+5388 : 22 Vacant Error
+5392 : 24 Vacant Error
+5393 : 22 Vacant Error
+5141 : 11 Vacant Error
+5149 : 14 Vacant Error
+5203 : 19 Vacant Error
+5208 : 00 Vacant Error
+5241 : 12 Vacant Error
+5388 : 37 Vacant Error

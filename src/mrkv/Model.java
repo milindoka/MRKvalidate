@@ -27,6 +27,7 @@ public class Model {
 	
 	 private String Division,Examination, Subject, Examiner,Date,MaxMarks;
 	 public String JarFilePath;
+	 public ArrayList<String>  Errors = new ArrayList<String>();
 	 
 	 void SetParameters()
 	 {	 String temp1[],temp2[];
@@ -158,6 +159,9 @@ public class Model {
     {	String temp[],stemp;
 	    stemp=strArray.get(7);
 	    temp=stemp.split(":");
+	   // Errors.removeAll(Errors);
+	   
+	    
 	    int TotalSets=Integer.parseInt(temp[1].replaceAll("[^0-9.]",""));
     
 	    stemp=strArray.get(13+3*TotalSets); temp=stemp.split(":");
@@ -168,7 +172,7 @@ public class Model {
     	
     	stemp=strArray.get(17+3*TotalSets); temp=stemp.split(":");
     	Subject=temp[1].trim();
-    	
+   
     	
     	stemp=strArray.get(18+3*TotalSets); temp=stemp.split(":");
     	Examination=temp[1].trim();
@@ -184,20 +188,25 @@ public class Model {
 		
 		int introll=Integer.parseInt(temp[0].trim());
 		if(Vacant(introll))
-		{if(stemp.contains("AB"))
+		{ if(temp[1].trim().length()==0) continue;
+		  if(stemp.contains("AB"))
 			{ String ready=stemp.replace("AB", "");
 			  strArray.set(i,ready);
 			}
-			
+		  else
+			  { System.out.println(stemp + "Vacant Error");
+			    Errors.add(stemp+"Vacant Error");
+			  }
+		 
 		}
 		
 		}
 		
-		
-
-    	
+	
+		    	
     }
 
+    
     
     private boolean Vacant(int roll)
     { //boolean vacant=true;
@@ -207,6 +216,8 @@ public class Model {
          	  if(!OptedSubjects.contains(Subject.substring(0,2))) 
  			   { System.out.print(roll);
  			     System.out.println(" Sub Vacant");
+ 			     String str=String.format("%d Sub Vacant",roll);
+ 			     Errors.add(str);
  			     return true;
  			   }
         	 return false; // Student exists NOT vacant
@@ -239,19 +250,47 @@ public class Model {
     	
     	/* Rename Routine - Implement Later 
     	 
+    	
     	 
-    	 File oldfile = new File(pathArray.get(x));
-         File newfile = new File(JarFilePath+"/"+Division+"-"+Examination+"-"+Subject+"-[Rectified]-"+Examiner+".mrk");
-
-         if(oldfile.renameTo(newfile)) {
-            System.out.println("File name changed succesful");
-         } else {
-            System.out.println("Rename failed");
-         } 
+    	 FileWriter f0=null;
+    	try {f0 = new FileWriter(pathArray.get(x));	} catch (IOException e1) {e1.printStackTrace();	}
+        String newLine = System.getProperty("line.separator");
+        
+    	
+    	for(int i=0;i<strArray.size();i++) 
+    		{f0.write(strArray.get(i));f0.write(newLine);}
+    	
+    	f0.close();
+    	
+    	 
+    	 
     	*/
-    }
-    
 
+    }
+    	
+    	public void SaveErrorLog()
+{
+	 String newLine = System.getProperty("line.separator");
+
+    	  FileWriter f0=null;
+	    	try { 
+	    		  f0 = new FileWriter(JarFilePath+"/Errors.txt");	
+	    	     for(int ee=0;ee<Errors.size();ee++)
+   	    	     {  f0.write(Errors.get(ee));
+   	    	        f0.write(newLine);
+	    	          }
+	    	 	   f0.close();
+	    	
+	    	     } 
+	    	  catch (IOException e1)
+	    	   {e1.printStackTrace();	}
+
+    	
+    
+    
+      }
+    
+    
     
     
     

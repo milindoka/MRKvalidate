@@ -72,7 +72,7 @@ public void show(long msg)
     	{
     	model.LoadMarkListFileToStrArray(fileindex);
     	model.ExtractAllHeaderFields();
-       // model.ProcessCurrentMarklist();
+        model.SaveErrorLog();
     	try {
 			model.SaveList(fileindex);
 		} catch (IOException e) {
