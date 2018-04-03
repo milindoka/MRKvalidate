@@ -130,7 +130,7 @@ public class Model {
     {       strArray.removeAll(strArray);
     		markArray.removeAll(markArray);
     		rollArray.removeAll(rollArray);
-    
+            Errors.add(nameArray.get(currentindex));
         	BufferedReader reader=null;
     		try {
     			reader = new BufferedReader(new FileReader(pathArray.get(currentindex)));
@@ -155,13 +155,13 @@ public class Model {
          }
     
 
-    public void ExtractAllHeaderFields()
+    public int ExtractAllHeaderFields()
     {	String temp[],stemp;
 	    stemp=strArray.get(7);
 	    temp=stemp.split(":");
 	   // Errors.removeAll(Errors);
 	   
-	    
+	    int replacecount=0;
 	    int TotalSets=Integer.parseInt(temp[1].replaceAll("[^0-9.]",""));
     
 	    stemp=strArray.get(13+3*TotalSets); temp=stemp.split(":");
@@ -185,25 +185,23 @@ public class Model {
 		for(int i=28+3*TotalSets;i<strArray.size();i++) 
 		{
 		stemp=strArray.get(i); temp=stemp.split(":");
-		
 		int introll=Integer.parseInt(temp[0].trim());
 		if(Vacant(introll))
-		{ if(temp[1].trim().length()==0) continue;
-		  if(stemp.contains("AB"))
-			{ String ready=stemp.replace("AB", "");
+		  {if(temp[1].trim().length()==0) continue;
+		   if(stemp.contains("AB"))
+			 { String ready=stemp.replace("AB", "");
 			  strArray.set(i,ready);
-			}
+			  replacecount++;
+			 }
 		  else
 			  { System.out.println(stemp + "Vacant Error");
 			    Errors.add(stemp+"Vacant Error");
 			  }
-		 
-		}
+		   }
 		
-		}
-		
-	
-		    	
+		} //for loop ends
+     Errors.add(String.format("%d Vacants in the list", replacecount));
+     return replacecount;
     }
 
     
@@ -214,10 +212,7 @@ public class Model {
          { if(roll>=Left.get(i) && roll<=Right.get(i)) 
          	{ String OptedSubjects=Subjects.get(i);
          	  if(!OptedSubjects.contains(Subject.substring(0,2))) 
- 			   { System.out.print(roll);
- 			     System.out.println(" Sub Vacant");
- 			     String str=String.format("%d Sub Vacant",roll);
- 			     Errors.add(str);
+ 			   {
  			     return true;
  			   }
         	 return false; // Student exists NOT vacant

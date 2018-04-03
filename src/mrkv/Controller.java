@@ -71,16 +71,20 @@ public void show(long msg)
     	for(int fileindex=0;fileindex<totalfiles;fileindex++)
     	{
     	model.LoadMarkListFileToStrArray(fileindex);
-    	model.ExtractAllHeaderFields();
+    	int replacecount=model.ExtractAllHeaderFields();
         model.SaveErrorLog();
-    	try {
+        show("pause");
+        if(replacecount==0) continue;
+        try {
 			model.SaveList(fileindex);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	show("Pause");
+    	
     	}
+
+    	
     	/*
     	String errorMessage = "";
     	do {
