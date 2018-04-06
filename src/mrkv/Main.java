@@ -1,20 +1,31 @@
 package mrkv;
 
 
-import javax.swing.SwingUtilities;
 
-public class Main
+public class Main 
 {
-    public static void main(String[] args) {           
-        SwingUtilities.invokeLater(new Runnable()   
-        {
-           
-            public void run() {                                           
-            	Model model = new Model();
-            	View view = new View("-"); 
-            	Controller controller = new Controller(model,view);
-            	controller.contol();
-            }
-        });  
-    }
+    
+    
+	public static void main(String[] args) 
+	{    
+		
+	    MRKvalidate m=new MRKvalidate();    
+	    String jarpath=m.getJarPath();
+	    String schemepath=jarpath+"/Scheme.txt";
+	    m.LoadRollSubjectSchemeToArray(schemepath);
+	    m.SetParameters();              //
+	    int TotalMarklists=m.GetAllFiles();
+	    m.setVisible(true);
+	    m.Sort();
+	   // m.CheckVacant();
+	    m.iterate();
+	}    
+
+
+
+	
+	
+	
+
 }
+
