@@ -39,18 +39,6 @@ public class MRKvalidate extends JFrame
 		 public ArrayList<String>  Subjects = new ArrayList<String>();
     
 		 
-
-	//////Easy display message for string, int, long
-	public void show(String msg) 
-	{JOptionPane.showMessageDialog(null, msg);}
-	public void show(int msg)
-	{JOptionPane.showMessageDialog(null, msg);}
-	public void show(long msg)
-	{JOptionPane.showMessageDialog(null, msg);}
-
-
-		 
-		 
     public MRKvalidate()
     {
     	Font tr = new Font("courier", Font.PLAIN,20);
@@ -70,28 +58,41 @@ public class MRKvalidate extends JFrame
     }
     
     public void iterate()
-    {
+    {  // Errors.removeAll(Errors);
+    	
+    	if(TotalMarklists<=0) 
+    	{jb.setText("  No Files In Jar Folder. Nothing To Do !");
+    	try{Thread.sleep(5000);}catch(Exception e){}
+        System.exit(0);
+    	}
+    	
        int curfile=0;
-      while(curfile<TotalMarklists)
-        {    
+    
+       while(curfile<TotalMarklists)
+        { Errors.add(nameArray.get(curfile));   
     	  LoadMarkListFileToStrArray(curfile);
   	      int replacecount=ExtractAllHeaderFields();
            SaveErrorLog();
            String str=String.format(" %4d/%d :  %s",curfile+1,TotalMarklists,nameArray.get(curfile));
           jb.setText(str);
-           curfile=curfile+1;
+           
           try{Thread.sleep(400);}catch(Exception e){}        
       
-           if(replacecount==0) continue;
+           if(replacecount==0) { curfile++; continue;}
            try {
 			 SaveList(curfile);
 	    	} catch (IOException e) {}
 			// TODO Auto-generated catch block
            
-      try{Thread.sleep(300);}catch(Exception e1){}    
-    } 
-    try{Thread.sleep(1000);}catch(Exception e){}
-    //SaveReport();
+          try{Thread.sleep(300);}catch(Exception e1){}
+          curfile++;
+       } 
+       
+       
+    try{Thread.sleep(2000);}catch(Exception e){}
+    jb.setText("  Vacant Errors Stored In Errors.txt File ");
+    
+    try{Thread.sleep(4000);}catch(Exception e){}
     System.exit(0);
     }    
 
@@ -239,7 +240,8 @@ public int ExtractAllHeaderFields()
 	MaxMarks=temp[1].trim();
 	stemp=strArray.get(20+3*TotalSets); temp=stemp.split(":");
 	Date=temp[1].trim();
-
+    
+	
 	for(int i=28+3*TotalSets;i<strArray.size();i++) 
 	{
 	stemp=strArray.get(i); temp=stemp.split(":");
@@ -247,7 +249,8 @@ public int ExtractAllHeaderFields()
 	if(Vacant(introll))
 	  {if(temp[1].trim().length()==0) continue;
 	   if(stemp.contains("AB"))
-		 { String ready=stemp.replace("AB", "");
+		 { System.out.println("Replaced "+stemp);
+		   String ready=stemp.replace("AB", "");
 		  strArray.set(i,ready);
 		  replacecount++;
 		 }
@@ -258,7 +261,7 @@ public int ExtractAllHeaderFields()
 	   }
 	
 	} //for loop ends
- Errors.add(String.format("%d Vacants in the list", replacecount));
+ Errors.add(String.format("%d AB's (Vacants) Replaced With Empty", replacecount));
  return replacecount;
 }
 
@@ -338,41 +341,6 @@ private boolean Vacant(int roll)
     		{f0.write(strArray.get(i));f0.write(newLine);}
     	
     	f0.close();
-    	
-    	
     }
-    	
-
-
-    public void CheckVacant()
-    { 
-    	int totalfiles=GetAllFiles();
-    	for(int fileindex=0;fileindex<totalfiles;fileindex++)
-    	{
-    	  LoadMarkListFileToStrArray(fileindex);
-    	  int replacecount=ExtractAllHeaderFields();
-          SaveErrorLog();
-          jb.setText(String.format("%d",fileindex));
-          show("TTT");
-         try{Thread.sleep(300);}catch(Exception e){}        
-        
-          if(replacecount==0) continue;
-         try {
-			 SaveList(fileindex);
-	    	} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		  
-			
-	    }
-    	 // 
-         
-    	}
-    
-    }
-
-    
-
-    
     
 }
