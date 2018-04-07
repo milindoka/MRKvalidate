@@ -19,7 +19,8 @@ import java.util.Collections;
 
 public class MRKvalidate extends JFrame 
 {
-      
+	Color clashred=new Color(255,200,200);
+	Color color=Color.CYAN;
     private JFrame frame;
     public ArrayList<String>  Errors = new ArrayList<String>();
     JLabel jb;
@@ -45,11 +46,11 @@ public class MRKvalidate extends JFrame
 
     	frame = new JFrame("View");                                    
         jb=new JLabel(" ");    
-        jb.setForeground(Color.BLUE);
+       // jb.setForeground(Color.BLUE);
         jb.setFont(tr);
         frame.add(jb);    
-        frame.setBackground(Color.yellow);
-        frame.getContentPane().setBackground(Color.yellow);
+        frame.setBackground(color);
+        frame.getContentPane().setBackground(color);
         frame.setSize(700,60);
         frame.setLocationRelativeTo(null);
         frame.setUndecorated(true);
@@ -93,7 +94,7 @@ public class MRKvalidate extends JFrame
        
        
     try{Thread.sleep(2000);}catch(Exception e){}
-    jb.setText("  Vacant Errors Stored In Errors.txt File ");
+    jb.setText("     Vacant Errors Stored In Errors.txt File ... ");
     
     try{Thread.sleep(4000);}catch(Exception e){}
     System.exit(0);
