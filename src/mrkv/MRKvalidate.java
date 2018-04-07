@@ -50,7 +50,7 @@ public class MRKvalidate extends JFrame
         frame.add(jb);    
         frame.setBackground(Color.yellow);
         frame.getContentPane().setBackground(Color.yellow);
-        frame.setSize(550,60);
+        frame.setSize(700,60);
         frame.setLocationRelativeTo(null);
         frame.setUndecorated(true);
         frame.setVisible(true);
@@ -59,6 +59,9 @@ public class MRKvalidate extends JFrame
     
     public void iterate()
     {  // Errors.removeAll(Errors);
+    	
+    	jb.setText("   Checking Vacants and Replacing AB's With Blanks ...");
+    		try{Thread.sleep(5000);}catch(Exception e){}
     	
     	if(TotalMarklists<=0) 
     	{jb.setText("  No Files In Jar Folder. Nothing To Do !");
@@ -124,7 +127,6 @@ public class MRKvalidate extends JFrame
     			{
     			 if(!line.contains("#")) continue;
     			 strArray.add(line);
-    			 System.out.println(line);
     			}
     		} catch (IOException e) {
     			// TODO Auto-generated catch block
@@ -175,7 +177,6 @@ public int GetAllFiles()
 	         } 
 	      }
 	  TotalMarklists=pathArray.size();
-   System.out.println(TotalMarklists);
 	  return TotalMarklists;
 }
 
@@ -249,13 +250,13 @@ public int ExtractAllHeaderFields()
 	if(Vacant(introll))
 	  {if(temp[1].trim().length()==0) continue;
 	   if(stemp.contains("AB"))
-		 { System.out.println("Replaced "+stemp);
+		 {// System.out.println("Replaced "+stemp);
 		   String ready=stemp.replace("AB", "");
 		  strArray.set(i,ready);
 		  replacecount++;
 		 }
 	  else
-		  { System.out.println(stemp + "Vacant Error");
+		  {// System.out.println(stemp + "Vacant Error");
 		    Errors.add(stemp+"Vacant Error");
 		  }
 	   }
